@@ -75,7 +75,6 @@
                     <th>Puntos</th>
                     <th>G</th>
                     <th>E</th>
-                    <th>P</th>
                     <th>GF</th>
                     <th>GC</th>
                     <th>DG</th>
@@ -90,20 +89,20 @@
     <script>
         // Datos de jugadores en un arreglo
         const jugadores = [
-            { nombre: "Marcelo", g: 10, e: 21, p: 67, gf: 137, gc: 56 },
-            { nombre: "Luis", g: 12, e: 14, p: 72, gf: 122, gc: 59 },
-            { nombre: "Lennis", g: 9, e: 22, p: 67, gf: 165, gc: 86 },
-            { nombre: "Bayron", g: 12, e: 12, p: 74, gf: 176, gc: 98 },
-            { nombre: "Tomás", g: 9, e: 19, p: 70, gf: 188, gc: 128 },
-            { nombre: "Sergio", g: 8, e: 15, p: 75, gf: 171, gc: 99 },
-            { nombre: "Martín", g: 7, e: 17, p: 74, gf: 145, gc: 71 }
+            { nombre: "Marcelo", g: 10, e: 21, gf: 137, gc: 56 },
+            { nombre: "Luis", g: 12, e: 14, gf: 122, gc: 59 },
+            { nombre: "Lennis", g: 9, e: 22, gf: 165, gc: 86 },
+            { nombre: "Bayron", g: 12, e: 12, gf: 176, gc: 98 },
+            { nombre: "Tomás", g: 9, e: 19, gf: 188, gc: 128 },
+            { nombre: "Sergio", g: 8, e: 15, gf: 171, gc: 99 },
+            { nombre: "Martín", g: 7, e: 17, gf: 145, gc: 71 }
         ];
 
         // Seleccionar el cuerpo de la tabla
         const tablaBody = document.getElementById("tabla-body");
 
         let marcelo_l = 0;
-        let marcelo_v = 0;
+        let marcelo_v = 1;
         let luis_l = 0;
         let luis_v = 1;
         let lennis_l = 0;
@@ -117,8 +116,11 @@
         let martin_l = 1;
         let martin_v = 2;
 
+        // RESULTADO DEL PARTIDO
         let goles_local = 0;
         let goles_visita = 0;
+
+        let resultado_exacto = 0;
 
         let marceloG = 0;
         let luisG = 0;
@@ -129,20 +131,12 @@
         let martinG = 0;
 
         let marceloE = 0;
-        let luisE = 1;
+        let luisE = 0;
         let lennisE = 0;
         let bayronE = 0;
         let tomasE = 0;
         let sergioE = 0;
         let martinE = 0;
-
-        let marceloP = 0;
-        let luisP = 0;
-        let lennisP = 0;
-        let bayronP = 0;
-        let tomasP = 0;
-        let sergioP = 0;
-        let martinP = 0;
 
         let marceloGF = (marcelo_l >= goles_local ? goles_local : marcelo_l) + (marcelo_v >= goles_visita ? goles_visita : marcelo_v);
         let marceloGC = (marcelo_l > goles_local ? marcelo_l - goles_local : 0) + (marcelo_v > goles_visita ? marcelo_v - goles_visita : 0);
@@ -159,14 +153,80 @@
         let martinGF = (martin_l >= goles_local ? goles_local : martin_l) + (martin_v >= goles_visita ? goles_visita : martin_v);
         let martinGC = (martin_l > goles_local ? martin_l - goles_local : 0) + (martin_v > goles_visita ? martin_v - goles_visita : 0);
 
+        let marceloDG = marceloGF - marceloGC;
+        let luisDG = luisGF - luisGC;
+        let lennisDG = lennisGF - lennisGC;
+        let bayronDG = bayronGF - bayronGC;
+        let tomasDG = tomasGF - tomasGC;
+        let sergioDG = sergioGF - sergioGC;
+        let martinDG = martinGF - martinGC;
+
+        const dgs = [marceloDG, luisDG, lennisDG, bayronDG, tomasDG, sergioDG, martinDG];
+        const indicesMx = [];
+        
+        dgs.forEach((dg, index) => {
+            if (dg === Math.max(...dgs)) {
+                indicesMx.push(index);
+            }
+        });
+
+        console.log(indicesMx);
+
+        console.log(marceloDG);
+        console.log(luisDG);
+        console.log(lennisDG);
+        console.log(bayronDG);
+        console.log(tomasDG);
+        console.log(sergioDG);
+        console.log(martinDG);
+
+        if(indicesMx.length == 1) {
+            if (indicesMx[0] == 0) {
+                console.log("Marcelo");
+                marceloG = 1;
+            } else if (indicesMx[0] == 1) {
+                luisG = 1;
+            } else if (indicesMx[0] == 2) {
+                lennisG = 1;
+            } else if (indicesMx[0] == 3) {
+                bayronG = 1;
+            } else if (indicesMx[0] == 4) {
+                tomasG = 1;
+            } else if (indicesMx[0] == 5) {
+                sergioG = 1;
+            } else if (indicesMx[0] == 6) {
+                martinG = 1;
+            }
+        } else {
+            if (indicesMx.includes(0)) {
+                marceloE = 1;
+            }
+            if (indicesMx.includes(1)) {
+                luisE = 1;
+            }
+            if (indicesMx.includes(2)) {
+                lennisE = 1;
+            }
+            if (indicesMx.includes(3)) {
+                bayronE = 1;
+            }
+            if (indicesMx.includes(4)) {
+                tomasE = 1;
+            }
+            if (indicesMx.includes(5)) {
+                sergioE = 1;
+            }
+            if (indicesMx.includes(6)) {
+                martinE = 1;
+            }
+        }
+
         jugadores.forEach(jugador => {
             if (jugador.nombre === "Marcelo") {
                 if (marceloG == 1) {
                     jugador.g = jugador.g + 1;
                 } else if (marceloE == 1) {
                     jugador.e = jugador.e + 1;
-                } else if (marceloP == 1) {
-                    jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + marceloGF;
                 jugador.gc = jugador.gc + marceloGC;
@@ -176,8 +236,6 @@
                     jugador.g = jugador.g + 1;
                 } else if (luisE == 1) {
                     jugador.e = jugador.e + 1;
-                } else if (luisP == 1) {
-                    jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + luisGF;
                 jugador.gc = jugador.gc + luisGC;
@@ -187,8 +245,6 @@
                     jugador.g = jugador.g + 1;
                 } else if (lennisE == 1) {
                     jugador.e = jugador.e + 1;
-                } else if (lennisP == 1) {
-                    jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + lennisGF;
                 jugador.gc = jugador.gc + lennisGC;
@@ -198,8 +254,6 @@
                     jugador.g = jugador.g + 1;
                 } else if (bayronE == 1) {
                     jugador.e = jugador.e + 1;
-                } else if (bayronP == 1) {
-                    jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + bayronGF;
                 jugador.gc = jugador.gc + bayronGC;
@@ -209,8 +263,6 @@
                     jugador.g = jugador.g + 1;
                 } else if (tomasE == 1) {
                     jugador.e = jugador.e + 1;
-                } else if (tomasP == 1) {
-                    jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + tomasGF;
                 jugador.gc = jugador.gc + tomasGC;
@@ -220,8 +272,6 @@
                     jugador.g = jugador.g + 1;
                 } else if (sergioE == 1) {
                     jugador.e = jugador.e + 1;
-                } else if (sergioP == 1) {
-                    jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + sergioGF;
                 jugador.gc = jugador.gc + sergioGC;
@@ -231,8 +281,6 @@
                     jugador.g = jugador.g + 1;
                 } else if (martinE == 1) {
                     jugador.e = jugador.e + 1;
-                } else if (martinP == 1) {
-                    jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + martinGF;
                 jugador.gc = jugador.gc + martinGC;
@@ -331,7 +379,6 @@
                 <td>${jugador.g * 3 + jugador.e}</td>
                 <td>${jugador.g}</td>
                 <td>${jugador.e}</td>
-                <td>${jugador.p}</td>
                 <td>${jugador.gf}</td>
                 <td>${jugador.gc}</td>
                 <td>${jugador.gf - jugador.gc}</td>
