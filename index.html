@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,8 +48,16 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
+
+        <div id="resultado"></div>
+        <p>Leicester City</p>
+        <p id="golesLocal"></p>
+        <p id="golesVisita"></p>
+        <p>Manchester City</p>
+
         <h2 style="text-align: center;">Tabla de Posiciones</h2>
         <table class="table-gradient">
             <thead>
@@ -73,133 +82,151 @@
     <script>
         // Datos de jugadores en un arreglo
         const jugadores = [
-            { pos: 1, nombre: "Marcelo",g: 10, e: 21, p: 67, gf: 137, gc: 56},
-            { pos: 2, nombre: "Luis", g: 12, e: 14, p: 72, gf: 122, gc: 59},
-            { pos: 3, nombre: "Lennis", g: 9, e: 22, p: 67, gf: 165, gc: 86},
-            { pos: 4, nombre: "Bayron", g: 12, e: 12, p: 74, gf: 176, gc: 98},
-            { pos: 5, nombre: "Tomás", g: 9, e: 19, p: 70, gf: 188, gc: 128},
-            { pos: 6, nombre: "Sergio", g: 8, e: 15, p: 75, gf: 171, gc: 99},
-            { pos: 7, nombre: "Martín", g: 7, e: 17, p: 74, gf: 145, gc: 71}
+            { pos: "1°", nombre: "Marcelo", g: 10, e: 21, p: 67, gf: 137, gc: 56 },
+            { pos: "2°", nombre: "Luis", g: 12, e: 14, p: 72, gf: 122, gc: 59 },
+            { pos: "3°", nombre: "Lennis", g: 9, e: 22, p: 67, gf: 165, gc: 86 },
+            { pos: "4°", nombre: "Bayron", g: 12, e: 12, p: 74, gf: 176, gc: 98 },
+            { pos: "5°", nombre: "Tomás", g: 9, e: 19, p: 70, gf: 188, gc: 128 },
+            { pos: "6°", nombre: "Sergio", g: 8, e: 15, p: 75, gf: 171, gc: 99 },
+            { pos: "7°", nombre: "Martín", g: 7, e: 17, p: 74, gf: 145, gc: 71 }
         ];
 
         // Seleccionar el cuerpo de la tabla
         const tablaBody = document.getElementById("tabla-body");
-        
+
+        let goles_local = 0;
+        let goles_visita = 0;
+
+        let marcelo_l = 0;
+        let marcelo_v = 0;
+        let luis_l = 0;
+        let luis_v = 0;
+        let lennis_l = 0;
+        let lennis_v = 0;
+        let bayron_l = 0;
+        let bayron_v = 0;
+        let tomas_l = 0;
+        let tomas_v = 0;
+        let sergio_l = 0;
+        let sergio_v = 0;
+        let martin_l = 0;
+        let martin_v = 0;
+
         let marceloG = 0;
         let marceloE = 0;
         let marceloP = 0;
-        let marceloGF = 0;
-        let marceloGC = 0;
+        let marceloGF = (marcelo_l >= goles_local ? goles_local : marcelo_l) + (marcelo_v >= goles_visita ? goles_visita : marcelo_v);
+        let marceloGC = (marcelo_l > goles_local ? marcelo_l - goles_local : 0) + (marcelo_v > goles_visita ? marcelo_v - goles_visita : 0);
 
         let luisG = 0;
         let luisE = 0;
         let luisP = 0;
-        let luisGF = 0;
-        let luisGC = 0;
+        let luisGF = (luis_l >= goles_local ? goles_local : luis_l) + (luis_v >= goles_visita ? goles_visita : luis_v);
+        let luisGC = (luis_l > goles_local ? luis_l - goles_local : 0) + (luis_v > goles_visita ? luis_v - goles_visita : 0);
 
         let lennisG = 0;
         let lennisE = 0;
         let lennisP = 0;
-        let lennisGF = 0;
-        let lennisGC = 0;
+        let lennisGF = (lennis_l >= goles_local ? goles_local : lennis_l) + (lennis_v >= goles_visita ? goles_visita : lennis_v);
+        let lennisGC = (lennis_l > goles_local ? lennis_l - goles_local : 0) + (lennis_v > goles_visita ? lennis_v - goles_visita : 0);
 
         let bayronG = 0;
         let bayronE = 0;
         let bayronP = 0;
-        let bayronGF = 0;
-        let bayronGC = 0;
+        let bayronGF = (bayron_l >= goles_local ? goles_local : bayron_l) + (bayron_v >= goles_visita ? goles_visita : bayron_v);
+        let bayronGC = (bayron_l > goles_local ? bayron_l - goles_local : 0) + (bayron_v > goles_visita ? bayron_v - goles_visita : 0);
 
         let tomasG = 0;
         let tomasE = 0;
         let tomasP = 0;
-        let tomasGF = 0;
-        let tomasGC = 0;
+        let tomasGF = (tomas_l >= goles_local ? goles_local : tomas_l) + (tomas_v >= goles_visita ? goles_visita : tomas_v);
+        let tomasGC = (tomas_l > goles_local ? tomas_l - goles_local : 0) + (tomas_v > goles_visita ? tomas_v - goles_visita : 0);
 
         let sergioG = 0;
         let sergioE = 0;
         let sergioP = 0;
-        let sergioGF = 0;
-        let sergioGC = 0;
+        let sergioGF = (sergio_l >= goles_local ? goles_local : sergio_l) + (sergio_v >= goles_visita ? goles_visita : sergio_v);
+        let sergioGC = (sergio_l > goles_local ? sergio_l - goles_local : 0) + (sergio_v > goles_visita ? sergio_v - goles_visita : 0);
 
         let martinG = 0;
         let martinE = 0;
         let martinP = 0;
-        let martinGF = 0;
-        let martinGC = 0;
+        let martinGF = (martin_l >= goles_local ? goles_local : martin_l) + (martin_v >= goles_visita ? goles_visita : martin_v);
+        let martinGC = (martin_l > goles_local ? martin_l - goles_local : 0) + (martin_v > goles_visita ? martin_v - goles_visita : 0);
 
         jugadores.forEach(jugador => {
-            if(jugador.nombre === "Marcelo"){
-                if(marceloG == 1){
+            if (jugador.nombre === "Marcelo") {
+                if (marceloG == 1) {
                     jugador.g = jugador.g + 1;
-                }else if(marceloE == 1){
+                } else if (marceloE == 1) {
                     jugador.e = jugador.e + 1;
-                }else if(marceloP == 1){
+                } else if (marceloP == 1) {
                     jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + marceloGF;
                 jugador.gc = jugador.gc + marceloGC;
             }
-            if(jugador.nombre === "Luis"){
-                if(luisG == 1){
+            if (jugador.nombre === "Luis") {
+                if (luisG == 1) {
                     jugador.g = jugador.g + 1;
-                }else if(luisE == 1){
+                } else if (luisE == 1) {
                     jugador.e = jugador.e + 1;
-                }else if(luisP == 1){
+                } else if (luisP == 1) {
                     jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + luisGF;
                 jugador.gc = jugador.gc + luisGC;
             }
-            if(jugador.nombre === "Lennis"){
-                if(lennisG == 1){
+            if (jugador.nombre === "Lennis") {
+                if (lennisG == 1) {
                     jugador.g = jugador.g + 1;
-                }else if(lennisE == 1){
+                } else if (lennisE == 1) {
                     jugador.e = jugador.e + 1;
-                }else if(lennisP == 1){
+                } else if (lennisP == 1) {
                     jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + lennisGF;
                 jugador.gc = jugador.gc + lennisGC;
             }
-            if(jugador.nombre === "Bayron"){
-                if(bayronG == 1){
+            if (jugador.nombre === "Bayron") {
+                if (bayronG == 1) {
                     jugador.g = jugador.g + 1;
-                }else if(bayronE == 1){
+                } else if (bayronE == 1) {
                     jugador.e = jugador.e + 1;
-                }else if(bayronP == 1){
+                } else if (bayronP == 1) {
                     jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + bayronGF;
                 jugador.gc = jugador.gc + bayronGC;
             }
-            if(jugador.nombre === "Tomás"){
-                if(tomasG == 1){
+            if (jugador.nombre === "Tomás") {
+                if (tomasG == 1) {
                     jugador.g = jugador.g + 1;
-                }else if(tomasE == 1){
+                } else if (tomasE == 1) {
                     jugador.e = jugador.e + 1;
-                }else if(tomasP == 1){
+                } else if (tomasP == 1) {
                     jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + tomasGF;
                 jugador.gc = jugador.gc + tomasGC;
             }
-            if(jugador.nombre === "Sergio"){
-                if(sergioG == 1){
+            if (jugador.nombre === "Sergio") {
+                if (sergioG == 1) {
                     jugador.g = jugador.g + 1;
-                }else if(sergioE == 1){
+                } else if (sergioE == 1) {
                     jugador.e = jugador.e + 1;
-                }else if(sergioP == 1){
+                } else if (sergioP == 1) {
                     jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + sergioGF;
                 jugador.gc = jugador.gc + sergioGC;
             }
-            if(jugador.nombre === "Martín"){
-                if(martinG == 1){
+            if (jugador.nombre === "Martín") {
+                if (martinG == 1) {
                     jugador.g = jugador.g + 1;
-                }else if(martinE == 1){
+                } else if (martinE == 1) {
                     jugador.e = jugador.e + 1;
-                }else if(martinP == 1){
+                } else if (martinP == 1) {
                     jugador.p = jugador.p + 1;
                 }
                 jugador.gf = jugador.gf + martinGF;
@@ -207,6 +234,15 @@
             }
         });
 
+    </script>
+
+    <script>
+        // Mostrar los goles en la tabla
+        document.getElementById("golesLocal").innerText = goles_local;
+        document.getElementById("golesVisita").innerText = goles_visita;
+    </script>
+
+    <script>
         //  ordenar jugadores por puntos
         jugadores.sort((a, b) => (a.g * 3 + a.e) > (b.g * 3 + b.e) ? -1 : 1);
 
@@ -227,5 +263,8 @@
             tablaBody.appendChild(fila);
         });
     </script>
+
+    </script>
 </body>
+
 </html>
