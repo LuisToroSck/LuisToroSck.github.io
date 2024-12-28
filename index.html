@@ -46,6 +46,15 @@
         .table-gradient tr:hover {
             background-color: rgba(125, 242, 187, 0.4);
         }
+        #resultado {
+            margin-bottom: 10px;
+        }
+        .alinear {
+            display: flex;
+            justify-content: center; /* Centra los elementos horizontalmente */
+            align-items: center; /* Centra los elementos verticalmente */
+            gap: 10px; /* Espaciado entre elementos */
+        }
     </style>
 </head>
 
@@ -53,16 +62,13 @@
     <div class="container">
 
         <div id="resultado"></div>
-        <p>Leicester City</p>
-        <p id="golesLocal"></p>
-        <p id="golesVisita"></p>
-        <p>Manchester City</p>
+
+        <div id="res"></div>
 
         <h2 style="text-align: center;">Tabla de Posiciones</h2>
         <table class="table-gradient">
             <thead>
                 <tr>
-                    <th>Pos</th>
                     <th>Jugador</th>
                     <th>Puntos</th>
                     <th>G</th>
@@ -82,20 +88,17 @@
     <script>
         // Datos de jugadores en un arreglo
         const jugadores = [
-            { pos: "1°", nombre: "Marcelo", g: 10, e: 21, p: 67, gf: 137, gc: 56 },
-            { pos: "2°", nombre: "Luis", g: 12, e: 14, p: 72, gf: 122, gc: 59 },
-            { pos: "3°", nombre: "Lennis", g: 9, e: 22, p: 67, gf: 165, gc: 86 },
-            { pos: "4°", nombre: "Bayron", g: 12, e: 12, p: 74, gf: 176, gc: 98 },
-            { pos: "5°", nombre: "Tomás", g: 9, e: 19, p: 70, gf: 188, gc: 128 },
-            { pos: "6°", nombre: "Sergio", g: 8, e: 15, p: 75, gf: 171, gc: 99 },
-            { pos: "7°", nombre: "Martín", g: 7, e: 17, p: 74, gf: 145, gc: 71 }
+            { nombre: "Marcelo", g: 10, e: 21, p: 67, gf: 137, gc: 56 },
+            { nombre: "Luis", g: 12, e: 14, p: 72, gf: 122, gc: 59 },
+            { nombre: "Lennis", g: 9, e: 22, p: 67, gf: 165, gc: 86 },
+            { nombre: "Bayron", g: 12, e: 12, p: 74, gf: 176, gc: 98 },
+            { nombre: "Tomás", g: 9, e: 19, p: 70, gf: 188, gc: 128 },
+            { nombre: "Sergio", g: 8, e: 15, p: 75, gf: 171, gc: 99 },
+            { nombre: "Martín", g: 7, e: 17, p: 74, gf: 145, gc: 71 }
         ];
 
         // Seleccionar el cuerpo de la tabla
         const tablaBody = document.getElementById("tabla-body");
-
-        let goles_local = 0;
-        let goles_visita = 0;
 
         let marcelo_l = 0;
         let marcelo_v = 0;
@@ -112,45 +115,45 @@
         let martin_l = 0;
         let martin_v = 0;
 
+        let goles_local = 0;
+        let goles_visita = 0;
+
         let marceloG = 0;
+        let luisG = 0;
+        let lennisG = 0;
+        let bayronG = 0;
+        let tomasG = 0;
+        let sergioG = 0;
+        let martinG = 0;
+
         let marceloE = 0;
+        let luisE = 0;
+        let lennisE = 0;
+        let bayronE = 0;
+        let tomasE = 0;
+        let sergioE = 0;
+        let martinE = 0;
+
         let marceloP = 0;
+        let luisP = 0;
+        let lennisP = 0;
+        let bayronP = 0;
+        let tomasP = 0;
+        let sergioP = 0;
+        let martinP = 0;
+
         let marceloGF = (marcelo_l >= goles_local ? goles_local : marcelo_l) + (marcelo_v >= goles_visita ? goles_visita : marcelo_v);
         let marceloGC = (marcelo_l > goles_local ? marcelo_l - goles_local : 0) + (marcelo_v > goles_visita ? marcelo_v - goles_visita : 0);
-
-        let luisG = 0;
-        let luisE = 0;
-        let luisP = 0;
         let luisGF = (luis_l >= goles_local ? goles_local : luis_l) + (luis_v >= goles_visita ? goles_visita : luis_v);
-        let luisGC = (luis_l > goles_local ? luis_l - goles_local : 0) + (luis_v > goles_visita ? luis_v - goles_visita : 0);
-
-        let lennisG = 0;
-        let lennisE = 0;
-        let lennisP = 0;
+        let luisGC = (luis_l > goles_local ? luis_l - goles_local : 0) + (luis_v > goles_visita ? luis_v - goles_visita : 0); 
         let lennisGF = (lennis_l >= goles_local ? goles_local : lennis_l) + (lennis_v >= goles_visita ? goles_visita : lennis_v);
         let lennisGC = (lennis_l > goles_local ? lennis_l - goles_local : 0) + (lennis_v > goles_visita ? lennis_v - goles_visita : 0);
-
-        let bayronG = 0;
-        let bayronE = 0;
-        let bayronP = 0;
         let bayronGF = (bayron_l >= goles_local ? goles_local : bayron_l) + (bayron_v >= goles_visita ? goles_visita : bayron_v);
         let bayronGC = (bayron_l > goles_local ? bayron_l - goles_local : 0) + (bayron_v > goles_visita ? bayron_v - goles_visita : 0);
-
-        let tomasG = 0;
-        let tomasE = 0;
-        let tomasP = 0;
         let tomasGF = (tomas_l >= goles_local ? goles_local : tomas_l) + (tomas_v >= goles_visita ? goles_visita : tomas_v);
         let tomasGC = (tomas_l > goles_local ? tomas_l - goles_local : 0) + (tomas_v > goles_visita ? tomas_v - goles_visita : 0);
-
-        let sergioG = 0;
-        let sergioE = 0;
-        let sergioP = 0;
         let sergioGF = (sergio_l >= goles_local ? goles_local : sergio_l) + (sergio_v >= goles_visita ? goles_visita : sergio_v);
         let sergioGC = (sergio_l > goles_local ? sergio_l - goles_local : 0) + (sergio_v > goles_visita ? sergio_v - goles_visita : 0);
-
-        let martinG = 0;
-        let martinE = 0;
-        let martinP = 0;
         let martinGF = (martin_l >= goles_local ? goles_local : martin_l) + (martin_v >= goles_visita ? goles_visita : martin_v);
         let martinGC = (martin_l > goles_local ? martin_l - goles_local : 0) + (martin_v > goles_visita ? martin_v - goles_visita : 0);
 
@@ -243,6 +246,42 @@
     </script>
 
     <script>
+        // Mostrar el resultado en la tabla
+        const resultado = document.getElementById("resultado");
+        resultado.innerHTML = `
+            <h3>Resultado</h3>
+
+            <div class="alinear">
+            <img src="https://i.imgur.com/RG17Fzz.png" width="25px"> Leicester City      ${goles_local}
+            </div>
+            <br>
+            <div class="alinear">
+            <img src="https://i.imgur.com/z9Hcruh.png" width="25px"> Manchester City      ${goles_visita}
+            </div>
+        `;
+    </script>
+    
+    <script>
+        const res = document.getElementById("res");
+        res.innerHTML = `
+            ${marceloG == 1 ? "Marcelo +3" : ""}
+            ${luisG == 1 ? "Luis +3" : ""}
+            ${lennisG == 1 ? "Lennis +3" : ""}
+            ${bayronG == 1 ? "Bayron +3" : ""}
+            ${tomasG == 1 ? "Tomás +3" : ""}
+            ${sergioG == 1 ? "Sergio +3" : ""}
+            ${martinG == 1 ? "Martín +3" : ""}
+            ${marceloE == 1 ? "Marcelo +1" : ""}
+            ${luisE == 1 ? "Luis +1" : ""}
+            ${lennisE == 1 ? "Lennis +1" : ""}
+            ${bayronE == 1 ? "Bayron +1" : ""}
+            ${tomasE == 1 ? "Tomás +1" : ""}
+            ${sergioE == 1 ? "Sergio +1" : ""}
+            ${martinE == 1 ? "Martín +1" : ""}
+        `;
+    </script>
+
+    <script>
         //  ordenar jugadores por puntos
         jugadores.sort((a, b) => (a.g * 3 + a.e) > (b.g * 3 + b.e) ? -1 : 1);
 
@@ -250,7 +289,6 @@
         jugadores.forEach(jugador => {
             const fila = document.createElement("tr");
             fila.innerHTML = `
-                <td>${jugador.pos}</td>
                 <td>${jugador.nombre}</td>
                 <td>${jugador.g * 3 + jugador.e}</td>
                 <td>${jugador.g}</td>
