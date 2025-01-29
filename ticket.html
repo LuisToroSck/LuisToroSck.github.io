@@ -106,15 +106,17 @@
         <div id="mensaje">
             <h1>¡Felicidades! Tu ticket ha sido registrado mailov</h1>
         </div>
-        <a href="docs/ticket.pdf" download="ticket.pdf">Descargar ticket</a>
+        <button onclick="descargarPDF()">Descargar PDF</button>
     </div>
 
     <script>
-        var bool = false;
-
-        function mostrarMensaje() {
-            bool = !bool; // Alterna entre true y false
-            document.getElementById("mensaje").style.display = bool ? "block" : "none";
+        function descargarPDF() {
+            var link = document.createElement("a");
+            link.href = "docs/mi-archivo.pdf";
+            link.download = "mi-archivo.pdf";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 
