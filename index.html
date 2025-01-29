@@ -69,7 +69,7 @@
             font-size: 1rem;
             width: 10em;
             border-radius: 1rem;
-            color: lightcoral;
+            color: rgb(236, 23, 79);
             box-shadow: 0 0.4rem #dfd9d9;
             cursor: pointer;
         }
@@ -81,7 +81,7 @@
         }
 
         button:hover:not(:disabled) {
-            background: lightcoral;
+            background: rgb(236, 23, 79);
             color: white;
             text-shadow: 0 0.1rem #bcb4b4;
         }
@@ -93,7 +93,7 @@
 
         /* From Uiverse.io by catraco */
         .heart-container {
-            --heart-color: rgb(255, 239, 91);
+            --heart-color: rgb(236, 23, 79);
             position: relative;
             width: 50px;
             height: 50px;
@@ -177,6 +177,16 @@
                 display: none;
             }
         }
+
+        .form_style {
+            outline: none;
+            border: 2px solid #264143;
+            box-shadow: 3px 4px 0px 1px #EC174F;
+            width: 290px;
+            padding: 12px 10px;
+            border-radius: 4px;
+            font-size: 15px;
+        }
     </style>
 </head>
 
@@ -202,27 +212,27 @@
                 <div class="form">
                     <div class="row-auto">
                         <label for="nombre" class="col-form-label">Nombre</label>
-                        <input class="form-control form-control-lg" type="text" id="nombre"
+                        <input class="form_style" type="text" id="nombre"
                             placeholder="Ingresa tu nombre">
                         <p id="error-nombre" class="error">❌ Ese no es el nombre de mi novia :(</p>
                     </div>
                     <br>
                     <div class="row-auto">
                         <label for="apellido" class="col-form-label">Apellido</label>
-                        <input class="form-control form-control-lg" type="text" id="apellido"
+                        <input class="form_style" type="text" id="apellido"
                             placeholder="Ingresa tu apellido">
                         <p id="error-apellido" class="error">❌ Ups! ese no es tu apellido creo</p>
                     </div>
                     <br>
                     <div class="row-auto">
                         <label for="rut" class="col-form-label">Rut</label>
-                        <input class="form-control form-control-lg" type="text" id="rut" placeholder="así -> 123456789">
+                        <input class="form_style" type="text" id="rut" placeholder="así -> 123456789">
                         <p id="error-rut" class="error">❌ Pero ese no es tu rut milova</p>
                     </div>
                     <br>
                     <div class="row-auto">
                         <label for="primerBeso" class="col-form-label">¿Cuándo fue tu primer beso con tu novio?</label>
-                        <input class="form-control form-control-lg" type="date" id="primerBeso">
+                        <input class="form_style" type="date" id="primerBeso">
                         <p id="error-fecha" class="error">❌ NOOOO :( esa no es la fecha mailov. Hint: Taylor Swift</p>
                     </div>
                     <br>
