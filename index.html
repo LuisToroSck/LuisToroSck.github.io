@@ -1,68 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla de Posiciones en vivo</title>
+    <title>Registro San Valentín</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: cursive;
             margin: 0;
             padding: 0;
-            background: #f4f4f4;
+            background: #e165d7;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 100vh;
+        }
+
+        nav {
+            width: 100%;
+            background: #b34ebd;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
         }
 
         .container {
             width: 90%;
             max-width: 800px;
             text-align: center;
+            background: #dd97d7;
+            margin-top: 60px;
+            padding: 20px;
+            border-radius: 10px;
         }
 
-        .table-gradient {
-            background: linear-gradient(to bottom, rgb(125, 242, 187), rgb(255, 255, 255));
-            border-collapse: collapse;
-            width: 100%;
-            font-family: Century Gothic;
+        .error {
+            color: red;
             font-size: 14px;
-            margin: 0 auto;
-        }
-
-        .table-gradient th {
-            background: rgb(125, 242, 187);
-            color: #000;
-            padding: 10px;
-            text-align: left;
-        }
-
-        .table-gradient td {
-            padding: 8px;
-        }
-
-        .table-gradient tr:hover {
-            background-color: rgba(125, 242, 187, 0.4);
-        }
-        #resultado {
-            margin-bottom: 10px;
-        }
-        .alinear {
-            display: flex;
-            justify-content: center; /* Centra los elementos horizontalmente */
-            align-items: center; /* Centra los elementos verticalmente */
-            gap: 10px; /* Espaciado entre elementos */
+            display: none;
         }
     </style>
 </head>
 
 <body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Registro</a></li>
+            <li><a href="ticket.html">Ticket</a></li>
+            <li><a href="ruta.html">Ruta</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
+        <h1>Registro para tu mejor San Valentín</h1>
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">Por favor, ingresa tus datos para registrarte y pasar el día de San Valentín con tu novio</p>
+                <br>
+
+                <div class="form">
+                    <div class="row-auto">
+                        <label for="nombre" class="col-form-label">Nombre</label>
+                        <input class="form-control form-control-lg" type="text" id="nombre" placeholder="Ingresa tu nombre">
+                        <p id="error-nombre" class="error">❌ Ese no es el nombre de mi novia :(</p>
+                    </div>
+                    <br>
+                    <div class="row-auto">
+                        <label for="apellido" class="col-form-label">Apellido</label>
+                        <input class="form-control form-control-lg" type="text" id="apellido" placeholder="Ingresa tu apellido">
+                        <p id="error-apellido" class="error">❌ Ups! ese no es tu apellido creo</p>
+                    </div>
+                    <br>
+                    <div class="row-auto">
+                        <label for="primerBeso" class="col-form-label">¿Cuándo fue tu primer beso con tu novio?</label>
+                        <input class="form-control form-control-lg" type="date" id="primerBeso">
+                        <p id="error-fecha" class="error">❌ NOOOO :( esa no es la fecha mailov. Hint: Taylor Swift</p>
+                    </div>
+                    <br>
+                    <div>
+                        <button class="btn btn-primary" onclick="registrar()">Registrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    
+    <script>
+        function registrar() {
+            // Valores esperados
+            const nombreCorrecto = "Constanza";
+            const apellidoCorrecto = "Morales";
+            const fechaCorrecta = "2024-04-19";
+
+            // Obtener valores ingresados
+            let nombreIngresado = document.getElementById("nombre").value.trim();
+            let apellidoIngresado = document.getElementById("apellido").value.trim();
+            let fechaIngresada = document.getElementById("primerBeso").value;
+
+            // Obtener elementos de error
+            let errorNombre = document.getElementById("error-nombre");
+            let errorApellido = document.getElementById("error-apellido");
+            let errorFecha = document.getElementById("error-fecha");
+
+            // Validar nombre
+            if (nombreIngresado !== nombreCorrecto) {
+                errorNombre.style.display = "block";
+            } else {
+                errorNombre.style.display = "none";
+            }
+
+            // Validar apellido
+            if (apellidoIngresado !== apellidoCorrecto) {
+                errorApellido.style.display = "block";
+            } else {
+                errorApellido.style.display = "none";
+            }
+
+            // Validar fecha
+            if (fechaIngresada !== fechaCorrecta) {
+                errorFecha.style.display = "block";
+            } else {
+                errorFecha.style.display = "none";
+            }
+
+            // Si ambos datos son correctos, mostrar mensaje de éxito
+            if (nombreIngresado === nombreCorrecto && fechaIngresada === fechaCorrecta && apellidoIngresado === apellidoCorrecto) {
+                alert("✅ ¡Registro exitoso! Puedes revisar tu ticket ahí donde dice Ticket jfjdkj Nos vemos en San Valentín ❤️");
+            }
+        }
+    </script>
+
 </body>
 
 </html>
