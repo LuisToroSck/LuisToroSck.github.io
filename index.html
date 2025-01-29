@@ -74,6 +74,7 @@
     </nav>
 
     <div class="container">
+        <img src="kitty.png" alt="Gatito" width="200">
         <h1>Registro para tu mejor San Valentín</h1>
         <div class="card">
             <div class="card-body">
@@ -91,6 +92,12 @@
                         <label for="apellido" class="col-form-label">Apellido</label>
                         <input class="form-control form-control-lg" type="text" id="apellido" placeholder="Ingresa tu apellido">
                         <p id="error-apellido" class="error">❌ Ups! ese no es tu apellido creo</p>
+                    </div>
+                    <br>
+                    <div class="row-auto">
+                        <label for="rut" class="col-form-label">Rut</label>
+                        <input class="form-control form-control-lg" type="text" id="rut" placeholder="así -> 123456789">
+                        <p id="error-rut" class="error">❌ Pero ese no es tu rut milova</p>
                     </div>
                     <br>
                     <div class="row-auto">
@@ -113,16 +120,19 @@
             // Valores esperados
             const nombreCorrecto = "Constanza";
             const apellidoCorrecto = "Morales";
+            const rutCorrecto = "204511314";
             const fechaCorrecta = "2024-04-19";
 
             // Obtener valores ingresados
             let nombreIngresado = document.getElementById("nombre").value.trim();
             let apellidoIngresado = document.getElementById("apellido").value.trim();
+            let rutIngresado = document.getElementById("rut").value.trim();
             let fechaIngresada = document.getElementById("primerBeso").value;
 
             // Obtener elementos de error
             let errorNombre = document.getElementById("error-nombre");
             let errorApellido = document.getElementById("error-apellido");
+            let errorRut = document.getElementById("error-rut");
             let errorFecha = document.getElementById("error-fecha");
 
             // Validar nombre
@@ -139,6 +149,13 @@
                 errorApellido.style.display = "none";
             }
 
+            // Validar rut
+            if (rutIngresado !== rutCorrecto) {
+                errorRut.style.display = "block";
+            } else {
+                errorRut.style.display = "none";
+            }
+
             // Validar fecha
             if (fechaIngresada !== fechaCorrecta) {
                 errorFecha.style.display = "block";
@@ -147,7 +164,7 @@
             }
 
             // Si ambos datos son correctos, mostrar mensaje de éxito
-            if (nombreIngresado === nombreCorrecto && fechaIngresada === fechaCorrecta && apellidoIngresado === apellidoCorrecto) {
+            if (nombreIngresado === nombreCorrecto && fechaIngresada === fechaCorrecta && apellidoIngresado === apellidoCorrecto && rutIngresado === rutCorrecto) {
                 alert("✅ ¡Registro exitoso! Puedes revisar tu ticket ahí donde dice Ticket jfjdkj Nos vemos en San Valentín ❤️");
             }
         }
