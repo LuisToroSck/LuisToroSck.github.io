@@ -104,7 +104,7 @@
 
     <div class="container">
         <div id="mensaje">
-            <h1>¡Felicidades! Tu ticket ha sido registrado mailov</h1>
+            <h1>¡Felicidades! Aquí puedes descargar el ticket mailov</h1>
         </div>
         <button onclick="descargarPDF()">Descargar PDF</button>
     </div>
@@ -112,8 +112,8 @@
     <script>
         function descargarPDF() {
             var link = document.createElement("a");
-            link.href = "docs/mi-archivo.pdf";
-            link.download = "mi-archivo.pdf";
+            link.href = "docs/ticket.pdf";
+            link.download = "ticket.pdf";
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
