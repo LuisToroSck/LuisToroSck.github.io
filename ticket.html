@@ -55,6 +55,36 @@
             padding: 20px;
             border-radius: 10px;
         }
+
+        /* From Uiverse.io by aasisodiya */
+        button {
+            background-color: #eee;
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            width: 10em;
+            border-radius: 1rem;
+            color: rgb(236, 23, 79);
+            box-shadow: 0 0.4rem #dfd9d9;
+            cursor: pointer;
+        }
+
+        button:active {
+            color: white;
+            box-shadow: 0 0.2rem #dfd9d9;
+            transform: translateY(0.2rem);
+        }
+
+        button:hover:not(:disabled) {
+            background: rgb(236, 23, 79);
+            color: white;
+            text-shadow: 0 0.1rem #bcb4b4;
+        }
+
+        button:disabled {
+            cursor: auto;
+            color: grey;
+        }
     </style>
 </head>
 
@@ -74,9 +104,9 @@
 
     <div class="container">
         <div id="mensaje">
-            <h1>¡Felicidades! Tu ticket ha sido registrado</h1>
+            <h1>¡Felicidades! Tu ticket ha sido registrado mailov</h1>
         </div>
-        <button onclick="mostrarMensaje()">Registrar Ticket</button>
+        <a href="docs/ticket.pdf" download="ticket.pdf">Descargar ticket</a>
     </div>
 
     <script>
